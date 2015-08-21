@@ -1,4 +1,8 @@
 apply plugin: "java"
+apply plugin: "maven"
+
+version = 'SNAPSHOT'
+group   = 'ben.mom'
 
 repositories {
     jcenter()
