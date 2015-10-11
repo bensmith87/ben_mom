@@ -1,8 +1,9 @@
 apply plugin: "java"
 apply plugin: "maven"
+apply plugin: "checkstyle"
 
-version = 'SNAPSHOT'
-group   = 'ben.mom'
+version = "SNAPSHOT"
+group   = "ben.mom"
 
 repositories {
     jcenter()
