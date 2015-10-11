@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/bensmith87/mom.svg?branch=master)
+[![Build Status](https://travis-ci.org/bensmith87/mom.svg?branch=master)](https://travis-ci.org/bensmith87/mom)
 
 # MOM
 Message Oriented Middleware library.
