@@ -25,16 +25,19 @@ public class Connection {
     /**
      * The Logger.
      */
+    @NotNull
     private static final Logger LOGGER = LogManager.getLogger(Connection.class.getSimpleName());
 
     /**
      * Messages to send.
      */
+    @NotNull
     private final BlockingQueue<Message> messages = new LinkedBlockingQueue<>();
 
     /**
      * The socket.
      */
+    @NotNull
     private final Socket socket;
 
     /**
@@ -72,9 +75,11 @@ public class Connection {
 
     /**
      * Start the connection.
+     * @param connectionListener the connection listener
      * @return the name of the client
+     * @throws Exception something went wrong
      */
-    public final String run(IConnectionListener connectionListener) throws Exception {
+    public final String run(@NotNull IConnectionListener connectionListener) throws Exception {
         LOGGER.info("Connection starting");
         assert !running;
 

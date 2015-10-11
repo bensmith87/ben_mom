@@ -10,6 +10,9 @@ import java.io.Serializable;
 @Immutable
 public class ClientDetails implements Serializable {
 
+    /**
+     * The name of the client.
+     */
     private final String clientName;
 
     /**

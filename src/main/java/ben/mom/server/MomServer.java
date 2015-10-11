@@ -73,6 +73,8 @@ public final class MomServer {
     /**
      * Constructor.
      * @param serverPort the port number
+     * @param mock true to capture messages instead of forwarding them
+     * @throws IOException something went wrong
      */
     public MomServer(int serverPort, boolean mock) throws IOException {
         this.serverPort = serverPort;
@@ -92,11 +94,21 @@ public final class MomServer {
         LOGGER.info("MOM Server started");
     }
 
+    /**
+     * Send a message.
+     * @param destination the message destination
+     * @param body the message body
+     */
     public void sendMessage(@NotNull String destination, @NotNull Serializable body) {
         Message message = new Message(destination, body);
         messagesToSend.add(message);
     }
 
+    /**
+     * Get the last received message of a specific type.
+     * @param type the type of the message
+     * @return the message, null if none have been received
+     */
     @Nullable
     public Message getLastReceivedMessage(@NotNull Class<?> type) {
         return receivedMessages.get(type);
@@ -126,6 +138,9 @@ public final class MomServer {
         }
     }
 
+    /**
+     * Stop the server.
+     */
     public void stop() {
         if (running) {
             LOGGER.info("Stopping MOM Server");
@@ -149,8 +164,15 @@ public final class MomServer {
      */
     private class WelcomeLoop implements Runnable {
 
+        /**
+         * The server socket.
+         */
         private final ServerSocket socket;
 
+        /**
+         * Constructor
+         * @throws IOException something went wrong
+         */
         public WelcomeLoop() throws IOException {
             socket = new ServerSocket(serverPort);
         }
@@ -185,6 +207,9 @@ public final class MomServer {
             LOGGER.info("Welcome loop is stopped");
         }
 
+        /**
+         * Stop the welcome loop.
+         */
         public void stop() {
             try {
                 socket.close();

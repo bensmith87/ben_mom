@@ -4,12 +4,24 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 
+/**
+ * Message.
+ */
 public class Message implements Serializable {
 
+    /**
+     * Serial version UID.
+     */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Message destination.
+     */
     private final String destination;
 
+    /**
+     * Message body.
+     */
     private final Serializable body;
 
     /**
