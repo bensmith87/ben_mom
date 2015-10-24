@@ -136,17 +136,23 @@ public final class MomClient implements IMomClient {
      * @param body the message body
      */
     @SuppressWarnings("unchecked")
-    private <T> void processMessage(@NotNull T body) {
+    private <T> void processMessage(final @NotNull T body) {
         Class<?> messageClass = body.getClass();
         Set<IMessageProcessor<?>> processorsForThisType = messageProcessors.get(messageClass);
         if (processorsForThisType != null) {
             for (IMessageProcessor<?> processor : processorsForThisType) {
-                IMessageProcessor<T> typedProcessor = (IMessageProcessor<T>) processor;
+                final IMessageProcessor<T> typedProcessor = (IMessageProcessor<T>) processor;
                 if (eventQueue == null) {
                     typedProcessor.processMessage(body);
                 }
                 else {
-                    eventQueue.invoke(() -> typedProcessor.processMessage(body));
+                    eventQueue.invoke(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            typedProcessor.processMessage(body);
+                        }
+                    });
                 }
             }
         }
